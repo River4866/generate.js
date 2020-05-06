@@ -1,0 +1,54 @@
+int x;
+int y;
+
+color c1 = #0E1428;  //...............hex values for each color: ("Xiketic")
+color c2 = #7B9E89;  //...............("Morning Blue")
+color c3 = #D95D39;  //...............("Flame")
+
+int inc = 30;  //.....................how far each walker moves per cycle
+int size = 10;  //....................the size of each circle
+
+void setup() {
+  size(1080, 800 );   //..............set the window size
+  background(#FFFFFF);  //............set the background color ("White")
+
+  x = width / 2;  //..................set the starting position to
+  y = height / 2;  //.................the center of the screen
+}
+
+void draw() {
+  if (x > width) {  //................check if the x position is more than the width of the canvas
+   x = size;        //................if so, set x equal to 0 (other side) + the size of the walker
+  } else if (x < 0) {
+   x = width - size; 
+  }
+  
+  if (y > height) {  //................do the same for the y position
+   y = size; 
+  } else if (y < 0) {
+   y = height - size; 
+  }
+  
+  int choice = int(random(4));  //....choose a random number between 0 - 3
+
+  if (choice == 0) {  //..............for every choice, change either the
+    x+= inc;              //..........x position or the y position
+  } else if (choice == 1) {
+    x-= inc;  //......................x++ and x-- are shorthand, meaning:
+  } else if (choice == 2) {  //.......add 1 (or subtract) from the value of x
+    y+= inc;
+  } else if (choice == 3) {  //.......here = assigns a value, and == checks
+    y-= inc;                 //.......if a variable equals a value
+  }
+  
+  noStroke();  //.....................don't outline the shape
+  
+  fill(c1);  //.......................set the fill color
+  ellipse(x, y, size, size);  //......draw a cirlce at x, y, that is size large
+  
+  fill(c2);  //.......................repeat for the other two circles
+  ellipse(x, y + 15, size, size); //..this time, draw it 15px down
+  
+  fill(c3);
+  ellipse(x + 15, y, size, size); //..this time, draw it 15px to the right
+}
